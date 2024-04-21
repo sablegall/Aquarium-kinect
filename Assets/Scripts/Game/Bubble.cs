@@ -7,8 +7,8 @@ public class Bubble : MonoBehaviour
     private Vector3 mMovementDirection = Vector3.zero;
     private Coroutine mCurrentChanger = null;
 
-    private float cadreWidth = 4.0f;
-    private float cadreHeight = 4.0f;
+    // private float cadreWidth = 4.0f;
+    // private float cadreHeight = 4.0f;
 
     private void OnEnable()
     {
@@ -27,23 +27,20 @@ public class Bubble : MonoBehaviour
         //Return to BubbleManager
     }
 
-    // private void Update()
-    // {
-    //     //Movement
-    //     var pos = mMovementDirection * Time.deltaTime * 0.5f;
+    private void Update()
+    {
+        //Movement
+        transform.position += mMovementDirection * Time.deltaTime * 0.5f;
 
-    //     if (transform.position.x <= cadreWidth){
-    //         transform.position += new Vector3 (pos.x, 0, 0);
-    //     }
-    //     if (transform.position.y <= cadreHeight){
-    //         transform.position += new Vector3 (0, pos.y, 0);
-    //     }
-        
-    //     Debug.Log("bubble position x " + transform.position.x);
-    //     Debug.Log("bubble position y " + transform.position.y);
+        // if (transform.position.x <= cadreWidth){
+        //     transform.position += new Vector3 (pos.x, 0, 0);
+        // }
+        // if (transform.position.y <= cadreHeight){
+        //     transform.position += new Vector3 (0, pos.y, 0);
+        // }
     //     //Rotation
-    // }
-
+    }
+    
     private IEnumerator DirectionChanger()
     {
         while (gameObject.activeSelf)
@@ -52,5 +49,12 @@ public class Bubble : MonoBehaviour
 
             yield return new WaitForSeconds(3.0f);
         }
+    }
+
+    // Méthode pour arrêter le mouvement de la bulle
+    public void StopMovement()
+    {
+        // Arrêtez le mouvement en définissant la direction sur zéro
+        mMovementDirection = Vector3.zero;
     }
 }

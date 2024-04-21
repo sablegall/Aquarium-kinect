@@ -7,6 +7,10 @@ public class Bubble : MonoBehaviour
     private Vector3 mMovementDirection = Vector3.zero;
     private Coroutine mCurrentChanger = null;
 
+    private bool mDisappearing = false;
+    private float mDisappearTime = 3.0f; // Temps avant que la bulle ne disparaisse
+    private float mElapsedTime = 0.0f;
+
     // private float cadreWidth = 4.0f;
     // private float cadreHeight = 4.0f;
 
@@ -32,6 +36,17 @@ public class Bubble : MonoBehaviour
         //Movement
         transform.position += mMovementDirection * Time.deltaTime * 0.5f;
 
+        if (mDisappearing)
+        {
+            mElapsedTime += Time.deltaTime;
+            if (mElapsedTime >= mDisappearTime)
+            {
+                gameObject.SetActive(false);
+            }
+        }
+
+        //Debug.Log("default" + mElapsedTime);
+
         // if (transform.position.x <= cadreWidth){
         //     transform.position += new Vector3 (pos.x, 0, 0);
         // }
@@ -40,7 +55,19 @@ public class Bubble : MonoBehaviour
         // }
     //     //Rotation
     }
-    
+
+    public void StartDisappearing()
+    {
+            mDisappearing = true;
+            mElapsedTime = 0.0f;
+    }
+
+    public void StopDisappearing()
+    {
+        mDisappearing = false;
+        mElapsedTime = 0.0f;
+    }
+
     private IEnumerator DirectionChanger()
     {
         while (gameObject.activeSelf)

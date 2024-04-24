@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6225867076050655446}
   m_Layer: 0
   m_Name: PR_Hand
-  m_TagString: Untagged
+  m_TagString: Hand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,6 +121,10 @@ PrefabInstance:
     - target: {fileID: 1608708239029736810, guid: 8c6f3f5beac7f814a82fb1c8cc0db88a, type: 3}
       propertyPath: m_Name
       value: Mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 1608708239029736810, guid: 8c6f3f5beac7f814a82fb1c8cc0db88a, type: 3}
+      propertyPath: m_TagString
+      value: Hand
       objectReference: {fileID: 0}
     - target: {fileID: 6768246261569568724, guid: 8c6f3f5beac7f814a82fb1c8cc0db88a, type: 3}
       propertyPath: m_LocalPosition.x

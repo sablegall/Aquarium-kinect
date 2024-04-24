@@ -13,7 +13,6 @@ public class Bubble : MonoBehaviour
     private float mDisappearTime = 3.0f; // Temps avant que la bulle ne disparaisse
     private float mElapsedTime = 0.0f;
 
-
     private void OnEnable()
     {
         mCurrentChanger = StartCoroutine(DirectionChanger());
@@ -33,7 +32,7 @@ public class Bubble : MonoBehaviour
 
     private void Start()
     {
-        // Obtenez la référence au Box Collider du cadre
+        // Obtenir la référence au Box Collider du cadre
         cadreCollider = GameObject.FindWithTag("Bounds").GetComponent<BoxCollider2D>();
 
         if (cadreCollider == null)
@@ -51,17 +50,17 @@ public class Bubble : MonoBehaviour
     {
         if (cadreCollider != null)
         {
-            // Obtenez les limites du cadre
+            // Obtenir les limites du cadre
             float minX = cadreCollider.bounds.min.x;
             float maxX = cadreCollider.bounds.max.x;
             float minY = cadreCollider.bounds.min.y;
             float maxY = cadreCollider.bounds.max.y;
 
-            // Générez une position aléatoire à l'intérieur des limites du cadre
+            // Générer une position aléatoire à l'intérieur des limites du cadre
             float randomX = Random.Range(minX, maxX);
             float randomY = Random.Range(minY, maxY);
 
-            // Définissez la position de départ de la bulle sur la position aléatoire générée
+            // Définir la position de départ de la bulle sur la position aléatoire générée
             transform.position = new Vector3(randomX, randomY, transform.position.z);
         }
         else
@@ -72,20 +71,19 @@ public class Bubble : MonoBehaviour
 
     private void Update()
     {
-        //Movement horizontal de la bulle
-        //transform.position += new Vector3(mMovementDirection.x, 0f, 0f) * Time.deltaTime * 0.9f;
-
+        // Movement horizontal de la bulle
         if (cadreCollider != null)
-    {
-        // Limitez la position de la bulle dans les limites horizontales du cadre
-        float newX = Mathf.Clamp(transform.position.x + mMovementDirection.x * Time.deltaTime * 1.8f, cadreCollider.bounds.min.x, cadreCollider.bounds.max.x);
-        transform.position = new Vector3(newX, transform.position.y, transform.position.z);
-    }
-    else
-    {
-        Debug.LogError("Box Collider du cadre non assigné à la bulle.");
-    }
+        {
+            // Limitez la position de la bulle dans les limites horizontales du cadre
+            float newX = Mathf.Clamp(transform.position.x + mMovementDirection.x * Time.deltaTime * 1.8f, cadreCollider.bounds.min.x, cadreCollider.bounds.max.x);
+            transform.position = new Vector3(newX, transform.position.y, transform.position.z);
+        }
+        else
+        {
+            Debug.LogError("Box Collider du cadre non assigné à la bulle.");
+        }
 
+        // Faire disparaître la bulle au bout de 3s dès que le curseur reste dessus
         if (mDisappearing)
         {
             mElapsedTime += Time.deltaTime;
@@ -93,14 +91,7 @@ public class Bubble : MonoBehaviour
             {
                 gameObject.SetActive(false);
             }
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Bounds"))
-        {
-            //Debug.Log("Collision with bounds detected!");
+            Debug.Log("test " + mElapsedTime);
         }
     }
 
@@ -108,25 +99,35 @@ public class Bubble : MonoBehaviour
     {
             mDisappearing = true;
             mElapsedTime = 0.0f;
+            Debug.Log("start mDisappearing "+mDisappearing);
+            //StopCoroutine(DirectionChanger());
+
+
     }
 
     public void StopDisappearing()
     {
         mDisappearing = false;
         mElapsedTime = 0.0f;
+        Debug.Log("Stop mDisappearing "+mDisappearing);
+        //StopCoroutine(DirectionChanger());
+
+
     }
 
     private IEnumerator DirectionChanger()
     {
         while (gameObject.activeSelf)
-        {
-            // Génère une direction horizontale aléatoire entre -1 et 1
-            float randomX = Random.Range(-1f, 1f);
-        
-            // Assigne la nouvelle direction avec une composante x aléatoire et une composante y nulle
-            mMovementDirection = new Vector2(randomX, 0f).normalized;
-            
-            yield return new WaitForSeconds(3.0f);
+        {       
+            if(!mDisappearing){
+                
+                // Génère une direction horizontale aléatoire entre -1 et 1
+                float randomX = Random.Range(-1f, 1f);
+
+                // Assigne la nouvelle direction avec une composante x aléatoire et une composante y nulle
+                mMovementDirection = new Vector2(randomX, 0f).normalized;
+            }
+            yield return new WaitForSeconds(10.0f);
         }
     }
 

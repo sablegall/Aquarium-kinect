@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bubble
   - Bounds
+  - Hand
   layers:
   - Default
   - TransparentFX

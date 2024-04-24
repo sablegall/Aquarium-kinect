@@ -17,16 +17,14 @@ public class Hand : MonoBehaviour
         Bubble bubble = collision.gameObject.GetComponent<Bubble>();
         if (collision.gameObject.CompareTag("Bubble"))
         {
+
             if (bubble != null)
             {
                 bubble.StartDisappearing();
+                // Arrêter le mouvement de la bulle
+                bubble.StopMovement();
+
             }
-        }
-        
-        // Arrêter le mouvement de la bulle
-        if (bubble != null)
-        {
-            bubble.StopMovement();
         }
     }
 

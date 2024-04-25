@@ -8,6 +8,66 @@ public class GameManager : MonoBehaviour
     public int maxTargets = 1; // Nombre maximum d'objets autorisés
     private List<GameObject> spawnedTargets = new List<GameObject>();
 
+    public static GameManager Instance {get; private set;}
+
+   // public GameObject bulle = targets[0];
+    public GameObject hand;
+
+    private bool mDisappearing = false;
+    private float mDisappearTime = 3.0f; // Temps avant que la bulle ne disparaisse
+    private float mElapsedTime = 0.0f;
+
+    private void Awake()
+    {
+        if (Instance != null){
+            Destroy(this);
+        }
+        else{
+            Instance = this;
+        }
+    }
+
+    private void Update()
+    {
+        //Faire disparaître la bulle au bout de 3s dès que le curseur reste dessus
+        if (mDisappearing)
+        {
+            mElapsedTime += Time.deltaTime;
+            if (mElapsedTime >= mDisappearTime)
+            {
+
+                GameObject bulle = targets[0];
+
+                var xb = bulle.transform.position.x;
+                var xh = hand.transform.position.x;
+                if(Mathf.Abs(xb - xh) < 0.5f){
+                    //bulle.SetActive(false);
+                    StopDisappearing();
+                }
+                //gameObject.SetActive(false);
+                Debug.Log("bulle pos x " + bulle.transform.position.x);
+                Debug.Log("hand pos x " + hand.transform.position.x);
+            }
+            Debug.Log("test " + mElapsedTime);
+        }
+    }
+
+    public void StartDisappearing()
+    {
+            mDisappearing = true;
+            mElapsedTime = 0.0f;
+            Debug.Log("start mDisappearing "+mDisappearing);
+            //StopCoroutine(DirectionChanger());
+    }
+
+    public void StopDisappearing()
+    {
+        mDisappearing = false;
+        mElapsedTime = 0.0f;
+        Debug.Log("Stop mDisappearing "+mDisappearing);
+        //StopCoroutine(DirectionChanger());
+    }
+
     // Start is called before the first frame update
     void Start()
     {

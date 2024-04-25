@@ -12,15 +12,15 @@ public class Hand : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         Bubble bubble = collision.gameObject.GetComponent<Bubble>();
         if (collision.gameObject.CompareTag("Bubble"))
         {
-
+            Debug.Log("enter");
             if (bubble != null)
             {
-                bubble.StartDisappearing();
+                GameManager.Instance.StartDisappearing();
                 // Arrêter le mouvement de la bulle
                 bubble.StopMovement();
 
@@ -28,15 +28,17 @@ public class Hand : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Bubble"))
-        {
-            Bubble bubble = collision.gameObject.GetComponent<Bubble>();
-            if (bubble != null)
-            {
-                bubble.StopDisappearing();
-            }
-        }
-    }
+    // private void OnTriggerExit2D(Collider2D collision)
+    // {
+        
+    //     if (collision.gameObject.CompareTag("Bubble"))
+    //     {
+    //         Debug.Log("exit");
+    //         Bubble bubble = collision.gameObject.GetComponent<Bubble>();
+    //         if (bubble != null)
+    //         {
+    //            // GameManager.Instance.StopDisappearing();
+    //         }
+    //     }
+    // }
 }

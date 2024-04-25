@@ -271,6 +271,8 @@ MonoBehaviour:
   targets:
   - {fileID: 7127613313310753680, guid: c6b51f266c384124fb1053de601095e8, type: 3}
   maxTargets: 1
+  bulle: {fileID: 0}
+  hand: {fileID: 9156033997017444121, guid: a8e2094ef12d05f4fa6b9bdf06b1d013, type: 3}
 --- !u!1001 &433452422
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ public class Bubble : MonoBehaviour
     private float mDisappearTime = 3.0f; // Temps avant que la bulle ne disparaisse
     private float mElapsedTime = 0.0f;
 
+
     private void OnEnable()
     {
         mCurrentChanger = StartCoroutine(DirectionChanger());
@@ -84,15 +85,15 @@ public class Bubble : MonoBehaviour
         }
 
         // Faire disparaître la bulle au bout de 3s dès que le curseur reste dessus
-        if (mDisappearing)
-        {
-            mElapsedTime += Time.deltaTime;
-            if (mElapsedTime >= mDisappearTime)
-            {
-                gameObject.SetActive(false);
-            }
-            Debug.Log("test " + mElapsedTime);
-        }
+        // if (mDisappearing)
+        // {
+        //     mElapsedTime += Time.deltaTime;
+        //     if (mElapsedTime >= mDisappearTime)
+        //     {
+        //         gameObject.SetActive(false);
+        //     }
+        //     Debug.Log("test " + mElapsedTime);
+        // }
     }
 
     public void StartDisappearing()
@@ -101,8 +102,6 @@ public class Bubble : MonoBehaviour
             mElapsedTime = 0.0f;
             Debug.Log("start mDisappearing "+mDisappearing);
             //StopCoroutine(DirectionChanger());
-
-
     }
 
     public void StopDisappearing()
@@ -111,8 +110,6 @@ public class Bubble : MonoBehaviour
         mElapsedTime = 0.0f;
         Debug.Log("Stop mDisappearing "+mDisappearing);
         //StopCoroutine(DirectionChanger());
-
-
     }
 
     private IEnumerator DirectionChanger()
@@ -127,7 +124,7 @@ public class Bubble : MonoBehaviour
                 // Assigne la nouvelle direction avec une composante x aléatoire et une composante y nulle
                 mMovementDirection = new Vector2(randomX, 0f).normalized;
             }
-            yield return new WaitForSeconds(10.0f);
+            yield return new WaitForSeconds(5.0f);
         }
     }
 

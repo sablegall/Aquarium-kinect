@@ -36,12 +36,12 @@ public class GameManager : MonoBehaviour
             if (mElapsedTime >= mDisappearTime)
             {
 
-                GameObject bulle = targets[0];
+                GameObject bulle = spawnedTargets[0];
 
                 var xb = bulle.transform.position.x;
                 var xh = hand.transform.position.x;
                 if(Mathf.Abs(xb - xh) < 0.5f){
-                    //bulle.SetActive(false);
+                    bulle.SetActive(false);
                     StopDisappearing();
                 }
                 //gameObject.SetActive(false);
